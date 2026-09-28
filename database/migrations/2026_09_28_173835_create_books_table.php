@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('title');
             $table->year('publication_year')->nullable();
-            $table->foreignId(category_id)->constrained();
+            $table->foreignId('category_id')->constrained();
             $table->text('description')->nullable();
             $table->timestamps();
         });
