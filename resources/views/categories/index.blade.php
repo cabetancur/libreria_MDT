@@ -9,14 +9,17 @@
     <main>
         <h1>Categorías</h1>
 
+        <p><a href="{{ route('categories.create') }}">Crear categoría</a></p>
+
         @if ($categories->isEmpty())
-            <p>No hay categorías registradas.</p>
+            <p>Aún no hay categorías.</p>
         @else
             <table>
                 <thead>
                     <tr>
-                        <th scope="col">Nombre</th>
-                        <th scope="col">Descripción</th>
+                        <th>Nombre</th>
+                        <th>Descripción</th>
+                        <th>Acciones</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -24,6 +27,14 @@
                         <tr>
                             <td>{{ $category->name }}</td>
                             <td>{{ $category->description }}</td>
+                            <td>
+                                <a href="{{ route('categories.edit', $category) }}">Editar</a>
+                                <form action="{{ route('categories.destroy', $category) }}" method="POST">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit">Eliminar</button>
+                                </form>
+                            </td>
                         </tr>
                     @endforeach
                 </tbody>
